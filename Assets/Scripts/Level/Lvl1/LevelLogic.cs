@@ -90,4 +90,28 @@ public class LevelLogic : MonoBehaviour
         if (MusicManager.Instance != null)
             MusicManager.Instance.PlayWelcomeMusic();
     }
+    public void BackToLevelSelect()
+    {
+        if (ended) return;
+
+        ended = true;
+        StopAllCoroutines();
+
+        StopLevelMusic();
+
+        string levelScene = PlayerPrefs.GetString("CURRENT_LEVEL");
+
+        if (!string.IsNullOrEmpty(levelScene))
+        {
+            var s = SceneManager.GetSceneByName(levelScene);
+            if (s.isLoaded)
+                SceneManager.UnloadSceneAsync(levelScene);
+        }
+
+        SceneManager.LoadSceneAsync("BackgroundScene", LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync("LevelSelect", LoadSceneMode.Additive);
+
+        if (MusicManager.Instance != null)
+            MusicManager.Instance.PlayWelcomeMusic();
+    }
 }

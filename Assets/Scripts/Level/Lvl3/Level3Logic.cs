@@ -47,7 +47,7 @@ public class Level3Logic : MonoBehaviour
     void UpdateExplosionText()
     {
         if (explosionText != null)
-            explosionText.text = $"Explosions: {explosionCount}";
+            explosionText.text = $"Explosions: {explosionCount/2}";
     }
 
     private void EndLevel()
@@ -56,7 +56,7 @@ public class Level3Logic : MonoBehaviour
         ended = true;
         int obstacleCount = GameObject.FindGameObjectsWithTag("Obstacle").Length;
         bool win = obstacleCount < winThreshold;
-        int finalScore = explosionCount * 100;
+        int finalScore = (explosionCount * 100)/2;
         finalScore = Mathf.Clamp(finalScore, 0, maxScore);
         SaveHighScore(finalScore);
 
@@ -96,6 +96,30 @@ public class Level3Logic : MonoBehaviour
         string levelScene = PlayerPrefs.GetString("CURRENT_LEVEL");
         if (!string.IsNullOrEmpty(levelScene))
             SceneManager.UnloadSceneAsync(levelScene);
+
+        SceneManager.LoadSceneAsync("BackgroundScene", LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync("LevelSelect", LoadSceneMode.Additive);
+
+        if (MusicManager.Instance != null)
+            MusicManager.Instance.PlayWelcomeMusic();
+    }
+    public void BackToLevelSelect()
+    {
+        if (ended) return;
+
+        ended = true;
+        StopAllCoroutines();
+
+        StopLevelMusic();
+
+        string levelScene = PlayerPrefs.GetString("CURRENT_LEVEL");
+
+        if (!string.IsNullOrEmpty(levelScene))
+        {
+            var s = SceneManager.GetSceneByName(levelScene);
+            if (s.isLoaded)
+                SceneManager.UnloadSceneAsync(levelScene);
+        }
 
         SceneManager.LoadSceneAsync("BackgroundScene", LoadSceneMode.Additive);
         SceneManager.LoadSceneAsync("LevelSelect", LoadSceneMode.Additive);

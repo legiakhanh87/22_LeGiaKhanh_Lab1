@@ -8,7 +8,7 @@ public class Level2Logic : MonoBehaviour
     public ResultUIAnimator resultUI;
 
     [Header("Score Settings")]
-    public int maxScore = 10000;
+    public int maxScore = 2000;
     public int winThreshold = 10; 
     private bool ended = false;
 
@@ -73,6 +73,30 @@ public class Level2Logic : MonoBehaviour
     private IEnumerator ReturnToMenuAfterDelay()
     {
         yield return new WaitForSeconds(3f);
+
+        string levelScene = PlayerPrefs.GetString("CURRENT_LEVEL");
+
+        if (!string.IsNullOrEmpty(levelScene))
+        {
+            var s = SceneManager.GetSceneByName(levelScene);
+            if (s.isLoaded)
+                SceneManager.UnloadSceneAsync(levelScene);
+        }
+
+        SceneManager.LoadSceneAsync("BackgroundScene", LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync("LevelSelect", LoadSceneMode.Additive);
+
+        if (MusicManager.Instance != null)
+            MusicManager.Instance.PlayWelcomeMusic();
+    }
+    public void BackToLevelSelect()
+    {
+        if (ended) return;
+
+        ended = true;
+        StopAllCoroutines();
+
+        StopLevelMusic();
 
         string levelScene = PlayerPrefs.GetString("CURRENT_LEVEL");
 
