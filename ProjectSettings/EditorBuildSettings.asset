@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/BootstrapScene.unity
+    guid: 2888554fcc365a646b651c1ff8ed12cd
+  - enabled: 1
+    path: Assets/Scenes/BackgroundScene.unity
+    guid: 7ee57a8d9f1b34440a01d246cb68ac64
+  - enabled: 1
+    path: Assets/Scenes/WelcomeScene.unity
+    guid: 8a33de02f9198da429b34e931042a7c4
+  - enabled: 1
+    path: Assets/Scenes/MenuScene.unity
+    guid: 06e407fe6ddfc004b9f1c2ee6869d544
+  - enabled: 1
+    path: Assets/Scenes/IntroductionScene.unity
+    guid: 63627582595e5ce469b858b8d7523b7b
+  - enabled: 1
+    path: Assets/Scenes/AboutUsScene.unity
+    guid: 5482416570dd1944785cf0f55066bb83
+  - enabled: 1
+    path: Assets/Scenes/LevelSelect.unity
+    guid: dcccafa6a75ce064aa15fe3018d116e4
+  - enabled: 1
+    path: Assets/Scenes/Level1.unity
+    guid: d400b24554b26664d87bf637f88ae838
+  - enabled: 1
+    path: Assets/Scenes/Level2.unity
+    guid: d9e7e7aa71d921943b38e3d95489a531
+  - enabled: 1
+    path: Assets/Scenes/Level3.unity
+    guid: 1d24d1419cd9b6248af2b0cdfcc82564
+  m_configObjects:
+    com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f, type: 2}
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  m_UseUCBPForAssetBundles: 0
