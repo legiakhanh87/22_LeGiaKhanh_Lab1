@@ -8,10 +8,13 @@ public class Level2Logic : MonoBehaviour
     public ResultUIAnimator resultUI;
 
     [Header("Score Settings")]
-    public int maxScore = 2000;
     public int winThreshold = 10; 
     private bool ended = false;
-
+    private int initialObstacle;
+    void Start()
+    {
+        initialObstacle = Level2Manager.InitialObstacleCount;
+    }
     void Update()
     {
         if (ended) return;
@@ -28,17 +31,8 @@ public class Level2Logic : MonoBehaviour
         if (ended) return;
         ended = true;
         int obstacleCount = GameObject.FindGameObjectsWithTag("Obstacle").Length;
-        bool win = obstacleCount < winThreshold;
-        int finalScore;
-        if (obstacleCount <= 0)
-        {
-            finalScore = maxScore;
-        }
-        else
-        {
-            finalScore = maxScore / obstacleCount;
-            finalScore = Mathf.Clamp(finalScore, 0, maxScore);
-        }
+        bool win = (initialObstacle-obstacleCount) < winThreshold;
+        int finalScore=obstacleCount*10;       
         SaveHighScore(finalScore);
         if (resultUI != null)
         {

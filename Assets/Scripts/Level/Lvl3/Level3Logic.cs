@@ -19,7 +19,11 @@ public class Level3Logic : MonoBehaviour
 
     private int explosionCount = 0;
     private bool ended = false;
-
+    private int initialObstacle;
+    void Start()
+    {
+        initialObstacle = Level3Manager.InitialObstacleCount;
+    }
     void Awake()
     {
         Instance = this;
@@ -55,7 +59,7 @@ public class Level3Logic : MonoBehaviour
         if (ended) return;
         ended = true;
         int obstacleCount = GameObject.FindGameObjectsWithTag("Obstacle").Length;
-        bool win = obstacleCount < winThreshold;
+        bool win = (initialObstacle - obstacleCount) < winThreshold;
         int finalScore = (explosionCount * 100)/2;
         finalScore = Mathf.Clamp(finalScore, 0, maxScore);
         SaveHighScore(finalScore);

@@ -4,18 +4,19 @@ using UnityEngine.SceneManagement;
 public class Level2Manager : MonoBehaviour
 {
     public GameObject obstaclePrefab;
-
+    public static int InitialObstacleCount;
     public Collider2D Border_Top;
     public Collider2D Border_Right;
     public Collider2D Border_Left;
     public Collider2D Border_Bottom;
 
-    public int spawnCount = 10;
+    public int spawnCount = 20;
     public float padding = 0.5f;
 
     void Start()
     {
         SpawnObjects();
+        InitialObstacleCount = spawnCount;
     }
 
     void SpawnObjects()
